@@ -1,0 +1,26 @@
+{
+  "name": "ffrank-yamlresource",
+  "version": "0.1.0",
+  "author": "Felix Frank",
+  "summary": "Puppet module that adds the yamlresource face",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ffrank/puppet-yamlresource",
+  "issues_url": "https://github.com/ffrank/puppet-yamlresource/issues",
+  "project_page": "https://github.com/ffrank/puppet-yamlresource",
+  "dependencies": [],
+  "tags": [ "resource", "yaml", "face" ],
+  "operatingsystem_support": [
+    {
+    "operatingsystem":"RedHat",
+    "operatingsystemrelease":[ "6.0", "7.0" ]
+    },
+    {
+    "operatingsystem":"Debian",
+    "operatingsystemrelease":[ "8.0" ]
+    },
+    {
+    "operatingsystem":"Ubuntu",
+    "operatingsystemrelease":[ "12.04", "14.04", "16.04" ]
+    }
+  ]
+}
