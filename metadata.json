@@ -1,6 +1,6 @@
 {
   "name": "ffrank-yamlresource",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Felix Frank",
   "summary": "Puppet module that adds the yamlresource face",
   "license": "Apache-2.0",
