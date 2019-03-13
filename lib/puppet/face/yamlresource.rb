@@ -1,5 +1,7 @@
 require 'puppet/face'
 require 'yaml'
+require 'json'
+require 'puppet/util/resource_piping'
 
 Puppet::Face.define(:yamlresource, '0.1.0') do
   
@@ -16,9 +18,9 @@ Puppet::Face.define(:yamlresource, '0.1.0') do
       type = args[0]
       name = args[1]
       if name && !name.empty?
-	parameters = args[2]
+        parameters = args[2]
         if parameters && !parameters.empty?
-          Puppet::Face[@name, @version].save(type, name, parameters)
+          Puppet::Face[@name, @version].save(type, name, parameters).first
         else
           Puppet::Face[@name, @version].find(type, name)
         end
@@ -59,8 +61,7 @@ Puppet::Face.define(:yamlresource, '0.1.0') do
       begin
         parameters = Psych.load(yaml)
       rescue Psych::SyntaxError => e
-        Puppet.err "There was an error parsing the parameter YAML document: #{e}"
-        return nil
+        raise Puppet::Error, "There was an error parsing the parameter YAML document: #{e}"
       end
 
       if !parameters || !parameters.is_a?(Hash)
@@ -72,8 +73,20 @@ Puppet::Face.define(:yamlresource, '0.1.0') do
       end
 
       resource = Puppet::Resource.new(type, name, :parameters => parameters)
-      save_result = Puppet::Resource.indirection.save(resource, "#{type}/#{name}")
-      [ save_result.first ]
+      Puppet::Resource.indirection.save(resource, "#{type}/#{name}")
+    end
+  end
+
+  action :receive do
+    summary "Reads YAML descriptions of resources from stdin and applies them."
+    when_invoked do |options|
+      Puppet.notice "ready to receive resources in YAML representation (one per line)..."
+      Puppet[:log_level] = :warning
+      STDIN.each_line do |line|
+        output = Puppet::Util::ResourcePiping.apply_resource(line, self)
+        puts JSON.dump(output)
+      end
+      Puppet.notice "terminating."
     end
   end
 end
