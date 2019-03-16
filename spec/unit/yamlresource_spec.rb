@@ -9,7 +9,9 @@ describe "puppet yamlresource" do
   let(:input_line) { "file /tmp/specfile { ensure: file }" }
 
   describe :save do
-    it "uses Psych to parse the yaml input" do
+    # This test does not work for Puppet 5 and older. To test for this in a simple
+    # fashion, check for the Puppet.newtype method, which was dropped in 6.0.
+    it "uses Psych to parse the yaml input", unless: Puppet.respond_to?(:newtype) do
       Psych.expects(:load).with(input[:yaml]).returns({ 'ensure' => 'file' })
       subject.save(input[:type], input[:name], input[:yaml])
     end
