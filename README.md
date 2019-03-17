@@ -68,3 +68,38 @@ and YAML even gives you a lot of freedom, such as optional quotes, trailing comm
 ## Through the Ruby API
 
 The functionality is available through Puppet's *faces* API. Documentation is yet to be created.
+
+## Receive mode
+
+Receive mode gives Puppet greater utility as a worker back-end for other software.
+
+The `puppet yamlresource receive` subcommand takes no other parameters. When invoked,
+Puppet starts reading resource descriptions from the command line. It tries and applies
+each of these resources. It always prints one line of JSON in return. Any errors
+are reported in this JSON structure.
+
+This is a typical, successful interaction with the running instance of `yamlresource receive`:
+
+```
+file /tmp/x { ensure: file }
+{"resource":"File[/tmp/x]","failed":false,"changed":true,"noop":false,"error":false,"exception":null}
+```
+
+Issues are indicated through the `error` and `exception` fields:
+
+```
+file /tmp/y { parameters: many }
+Error: (Applying File[/tmp/z]) no parameter named 'parameters'
+{"failed":true,"changed":false,"error":true,"exception":"no parameter named 'parameters'"}
+```
+
+This input format only works for resources without spaces in the resource title. A more
+robust input format is also JSON (wrapping the YAML parameters in a string):
+
+```
+{"type":"file", "title":"/tmp/z", "params":"{ ensure: file }"}
+{"resource":"File[/tmp/z]","failed":false,"changed":true,"noop":false,"error":false,"exception":null}`
+```
+
+This is quite cumbersome on the shell, but more reliable when integrating
+other software.
