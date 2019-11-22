@@ -40,6 +40,7 @@ matrix:
     -
       env: PUPPET_GEM_VERSION="~> 4.10.4"
       rvm: 2.3.0
+      stage: spec
 branches:
   only:
     - master

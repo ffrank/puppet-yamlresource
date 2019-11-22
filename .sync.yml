@@ -8,3 +8,4 @@
       stage: static
     - rvm: 2.3.0
       env: PUPPET_GEM_VERSION="~> 4.10.4"
+      stage: spec
