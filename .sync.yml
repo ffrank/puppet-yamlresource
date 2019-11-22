@@ -4,5 +4,7 @@
     - env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
       stage: static
   includes:
+    - env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file syntax lint metadata_lint"
+      stage: static
     - rvm: 2.3.0
       env: PUPPET_GEM_VERSION="~> 4.10.4"
