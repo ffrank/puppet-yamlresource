@@ -5,22 +5,46 @@
   "summary": "Puppet module that adds the yamlresource face",
   "license": "Apache-2.0",
   "source": "https://github.com/ffrank/puppet-yamlresource",
-  "issues_url": "https://github.com/ffrank/puppet-yamlresource/issues",
   "project_page": "https://github.com/ffrank/puppet-yamlresource",
-  "dependencies": [],
-  "tags": [ "resource", "yaml", "face" ],
+  "issues_url": "https://github.com/ffrank/puppet-yamlresource/issues",
+  "dependencies": [
+
+  ],
   "operatingsystem_support": [
     {
-    "operatingsystem":"RedHat",
-    "operatingsystemrelease":[ "6.0", "7.0" ]
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6.0",
+        "7.0"
+      ]
     },
     {
-    "operatingsystem":"Debian",
-    "operatingsystemrelease":[ "8.0" ]
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8.0"
+      ]
     },
     {
-    "operatingsystem":"Ubuntu",
-    "operatingsystemrelease":[ "12.04", "14.04", "16.04" ]
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04",
+        "16.04"
+      ]
     }
-  ]
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "tags": [
+    "resource",
+    "yaml",
+    "face"
+  ],
+  "pdk-version": "1.14.1",
+  "template-url": "pdk-default#1.14.1",
+  "template-ref": "1.14.1-0-g0b5b39b"
 }
