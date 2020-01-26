@@ -22,6 +22,10 @@ RSpec.configure do |config|
     # silly hack to make sure we have a temporary vardir, although the
     # location is in the environment path, which is bonkers
     Puppet[:vardir] = Puppet[:environmentpath] + "/vardir"
+
+    # the above hack clashes with puppetlabs_spec_helper,
+    # so we undo a specific setting from that lib
+    Puppet.features.stubs(:root?).returns(false)
   end
 
   config.after :each do
