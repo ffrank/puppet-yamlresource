@@ -3,7 +3,7 @@ require 'yaml'
 require 'json'
 require 'puppet/util/resource_piping'
 
-Puppet::Face.define(:yamlresource, '0.2.1') do
+Puppet::Face.define(:yamlresource, '0.2.2') do
   
   license "Apache 2"
   copyright "Felix Frank", 2016
